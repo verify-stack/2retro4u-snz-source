@@ -209,7 +209,7 @@ while wait() do
 	local speed = humanoid.WalkSpeed
 
 	if state == freefall or state == running then
-		canClimb = findLadder()
+		canClimb = findLadder() and humanoid.MoveDirection.Magnitude > 0.1
 	end
 
 	if canClimb then
@@ -217,7 +217,7 @@ while wait() do
 		bv.Velocity = Vector3.new(0, climbSpeed, 0)
 		bv.MaxForce = Vector3.new(climbSpeed * 100, 10e6, climbSpeed * 100)
 	else
-		if char.Humanoid:GetState() == Enum.HumanoidStateType.Climbing then
+		if state == Enum.HumanoidStateType.Climbing then
 			stepForwardFrames = 2
 		end
 
