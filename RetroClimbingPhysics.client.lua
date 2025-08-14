@@ -22,7 +22,10 @@ bv.MaxForce = Vector3.new()
 -- Climbing State
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
---local climbing = char:WaitForChild("Climbing")
+local climbing = Instance.new("BoolValue")
+climbing.Name = "CustomClimbingState"
+climbing.Value = false
+climbing.Parent = char
 --local setValue = climbing:WaitForChild("SetValue")
 
 --local function onClimbing(value)
@@ -217,7 +220,7 @@ while wait() do
 		bv.Velocity = Vector3.new(0, climbSpeed, 0)
 		bv.MaxForce = Vector3.new(climbSpeed * 100, 10e6, climbSpeed * 100)
 	else
-		if state == Enum.HumanoidStateType.Climbing then
+		if climbing.Value then
 			stepForwardFrames = 2
 		end
 
@@ -230,7 +233,7 @@ while wait() do
 		stepForwardFrames = stepForwardFrames - 1
 	end
 
-	--climbing.Value = canClimb
+	climbing.Value = canClimb
 end
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
